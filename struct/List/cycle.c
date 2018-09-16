@@ -5,7 +5,7 @@ pNode create() {
   pNode L = NULL;
   pNode end = NULL;
 
-  L = (pNode)malloc(sizeof(node));
+  L = (pNode)malloc(sizeof(Node));
 
   if (L == NULL) {
     printf("space error!.\n");
@@ -19,7 +19,7 @@ pNode create() {
   scanf("%d", &length);
 
   for (i = 1; i < length; i++) {
-    pNode p = (pNode)malloc(sizeof(node));
+    pNode p = (pNode)malloc(sizeof(Node));
 
     if (p == NULL) {
       printf("space error!.\n");
@@ -67,7 +67,33 @@ int getLength(pNode L) {
 }
 
 //向链表中插入节点
-int insert(pNode L, int pos, int data);
+int insert(pNode L, int pos, int data) {
+  pNode p = NULL;
+  bool flag = true;
+  if (pos > 0 || pos < getLength(L) + 2) {
+    p = (pNode)malloc(sizeof(Node));
+
+    if (p == NULL) {
+      printf("space error!.\n");
+      exit(0);
+    }
+
+    while (flag) {
+      pos -= 1;
+      if (pos == 0) 
+        break;
+      L = L->next;
+    }
+    p->data = data;
+    p->next = L->next;
+    L->next = p;
+    return 0;
+  }
+  else
+    flag = false;
+  
+  return 0;
+}
 
 //从链表中删除节点
 int del(pNode L, int pos);

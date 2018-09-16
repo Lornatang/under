@@ -1,8 +1,8 @@
 #ifndef CYCLE_H
 #define CYCLE_H
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 typedef struct node {
   int data;
   struct node *next;
