@@ -1,7 +1,5 @@
 #ifndef LIST_H
 #define LIST_H
-#include <stdio.h>
-#include <stdlib.h>
 #define MAX_SIZE 100
 
 typedef struct Sequential {

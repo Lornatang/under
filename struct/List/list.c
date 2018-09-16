@@ -1,4 +1,6 @@
 #include "list.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 // Initializes a sequential list with a capacity of 100
 seqList *initList() {
