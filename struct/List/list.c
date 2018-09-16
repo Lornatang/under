@@ -25,7 +25,7 @@ int insertList(seqList *L, int i, int x) {
   for (int j = L->last; j > i - 1; j--) {
     L->data[j + 1] = L->data[j];
     L->data[i - 1] = x;  // insert data
-    L->last++;           // get last element index
+    L->last += 1;        // get last element index
     return 0;
   }
   return 0;
