@@ -1,6 +1,6 @@
 #include "cycle.h"
 
-pNode create() {
+pNode init() {
   int i, length = 0, data = 0;
   pNode L = NULL;
   pNode end = NULL;
@@ -69,8 +69,7 @@ int getLength(pNode L) {
 //向链表中插入节点
 int insert(pNode L, int pos, int data) {
   pNode p = NULL;
-  bool flag = true;
-  if (pos > 0 || pos < getLength(L) + 2) {
+  if (pos > 0 && pos < getLength(L) + 2) {
     p = (pNode)malloc(sizeof(Node));
 
     if (p == NULL) {
@@ -78,25 +77,48 @@ int insert(pNode L, int pos, int data) {
       exit(0);
     }
 
-    while (flag) {
+    while (true) {
       pos -= 1;
-      if (pos == 0) 
-        break;
+      if (pos == 0) break;
       L = L->next;
     }
     p->data = data;
     p->next = L->next;
     L->next = p;
+    return 1;
+  } else
     return 0;
-  }
-  else
-    flag = false;
-  
-  return 0;
 }
 
 //从链表中删除节点
-int del(pNode L, int pos);
+int del(pNode L, int pos) {
+  pNode p = NULL;
+
+  if (pos > 0 && pos < getLength(L) + 1) {
+    while (true) {
+      pos -= 1;
+      if (pos == 0) break;
+      L = L->next;
+    }
+    p = L->next->next;
+    free(L->next);
+    L->next = p;
+    return 1;
+  } else
+    return 0;
+}
 
 //删除整个链表，释放内存
-void freeMemory(pNode *p);
+void freeMemory(pNode *p) {
+  pNode head = NULL;
+  while (*p != NULL) {
+    if (*p == (*p)->next) {
+      free(*p);
+      *p = NULL;
+    } else {
+      head = (*p)->next->next;
+      free((*p)->next);
+      (*p)->next = head;
+    }
+  }
+}
