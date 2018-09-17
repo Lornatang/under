@@ -29,4 +29,4 @@ int del(pNode L, int pos);
 //删除整个链表，释放内存
 void freeMemory(pNode *p);
 
-#endif
+#endif  // CYCLE_H
