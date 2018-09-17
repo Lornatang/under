@@ -13,8 +13,8 @@ pNode create(void) {
     exit(0);
   }
   L->data = 0;
-  L->pNext = L;
-  L->pPre = L;
+  L->next = L;
+  L->pre = L;
   end = L;
 
   printf("请输入想要创建链表的长度：");
@@ -32,10 +32,10 @@ pNode create(void) {
     scanf("%d", &data);
 
     p->data = data;
-    p->pPre = end;
-    p->pNext = L;
-    end->pNext = p;
-    L->pPre = p;
+    p->pre = end;
+    p->next = L;
+    end->next = p;
+    L->pre = p;
     end = p;
   }
   return L;

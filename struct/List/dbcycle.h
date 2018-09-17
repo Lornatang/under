@@ -2,8 +2,8 @@
 #define DBCYCLE_H
 typedef struct Node {
   int data;
-  struct Node *next;
-  struct Node *beg;
+  struct Node *next;  // next point
+  struct Node *pre;   // beg point
 } node, *pNode;
 
 // 创建双向循环链表
