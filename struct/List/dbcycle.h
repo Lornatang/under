@@ -28,3 +28,9 @@ int del(pNode L, int pos);
 void freeMemory(pNode *p);
 
 #endif  // DBCYCLE_H
+
+#ifndef STATUS
+#define STATUS
+#define true 1
+#define flase 0
+#endif
