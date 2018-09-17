@@ -2,8 +2,8 @@
 #define DBCYCLE_H
 typedef struct Node {
   int data;
-  struct Node *pNext;
-  struct Node *pPre;
+  struct Node *next;
+  struct Node *beg;
 } node, *pNode;
 
 // 创建双向循环链表
@@ -27,4 +27,4 @@ int del(pNode L, int pos);
 // 删除整个链表，释放内存
 void freeMemory(pNode *p);
 
-#endif
+#endif  // DBCYCLE_H
