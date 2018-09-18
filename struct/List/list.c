@@ -7,49 +7,70 @@ sqList *init() {
   sqList *L = NULL;
   L = (sqList *)malloc(sizeof(sqList));
   if (!L) exit(0);
-  L->data = 0;
-  L->length = maxSize;
+  L->next = NULL;
   return L;
 }  // init
 
 // insert value to node index
-int insert(sqList *L, int pos, int data) {
-  sqList *index;
-  sqList *node;
-  node = L;
-  if (pos < 1 && pos > L->length + 1) exit(0);
-  if (L->length >= maxSize) {
-    // Increase storage space
-    sqList *add;
-    add = (sqList *)realloc(L, (maxSize + increase) * sizeof(sqList));
-    if (!add) exit(0);
-    L = add;                // 传递新地址
-    L->length += increase;  // 增加存储容量
-  }
-  node = &(L[pos - 1]);
-  for (index = &(L[L->length - 1]); index > node; index--)
-    *(index + 1) = *index;
-  node->data = data;
-  L->length += 1;
-  return 0;
+sqList *insert(sqList *L, int pos, int data) {
+  int i = 0;
+  sqList *p;                              // insert node p
+  for (i = 1; i < pos; i++) L = L->next;  // find i node
+
+  p = (sqList *)malloc(sizeof(sqList));
+  p->data = data;
+  p->next = L->next;
+  L->next = p;
+
+  return L;
 }
 
-int delByPos(sqList *L, int pos) {
-  sqList *node;
-  sqList *index;
-  // pos (i <= i < L->index+1)
-  if ((pos < 1) || pos > L->length + 1) {
-    return 0;
+int getLength(sqList *L) {
+  sqList *p;
+  int length = 0;
+  for (p = L->next; p != NULL; p = p->next) length += 1;
+
+  return length;
+}
+
+sqList *delByPos(sqList *L, int data) {
+  sqList *node, *pre;  // pre为前驱结点，p为查找的结点。
+  node = L->next;
+  while (node->data != data) {  //查找值为x的元素
+    pre = node;
+    node = node->next;
   }
-  index = &(L[pos - 1]);  // get index
-  
-  return 0;
+  pre->next = node->next;  //删除操作，将其前驱next指向其后继。
+  free(node);
+  return L;
+}
+
+void dis(sqList *L) {
+  sqList *node;
+  for (node = L->next; node != NULL; node = node->next)
+    printf("Data:%d\n", node->data);
+
+  putchar('\n');
 }
 
 int main() {
   sqList *L;
   L = init();
-  insert(L, 1, 10);
-  printf("Length:%d\n", L->length);
+  insert(L, 1, 1);
+  insert(L, 2, 2);
+  insert(L, 3, 3);
+  insert(L, 4, 4);
+  insert(L, 5, 5);
+  insert(L, 6, 6);
+  insert(L, 7, 7);
+  insert(L, 8, 8);
+  insert(L, 9, 9);
+  insert(L, 10, 10);
+  insert(L, 11, 11);
+  printf("Length:%d\n", getLength(L));
+  dis(L);
+  delByPos(L, 11);
+  printf("Length:%d\n", getLength(L));
+  dis(L);
   return 0;
 }

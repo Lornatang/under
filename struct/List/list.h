@@ -7,7 +7,6 @@
 
 typedef struct Sequential {
   int data;
-  int length;
   struct Sequential *next;
 } sqList;
 
@@ -17,13 +16,17 @@ sqList *init();
 /**
  * Insert data into a sequential linked list.
  */
-int insert(sqList *L, int i, int x);
+sqList *insert(sqList *L, int i, int x);
 
 // delete node value
-int del(sqList *L, int i);
+sqList *del(sqList *L, int i);
 
 /**
  * find data is exist
  */
 int find(sqList *L, int x);
+
+// get List length
+int getLength(sqList *L);
+
 #endif  // LIST_H
