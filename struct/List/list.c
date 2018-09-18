@@ -3,66 +3,46 @@
 #include <stdlib.h>
 
 // Initializes a sequential list with a capacity of 100
-seqList *initList() {
-  seqList *L;
-  L = (seqList *)malloc(sizeof(seqList));
-  L->last = -1;  // The index that the pointer points to is -1
+sqList *init() {
+  sqList *L = NULL;
+  L = (sqList *)malloc(sizeof(sqList));
+  if (!L) exit(0);
+  L->data = 0;
+  L->length = 0;
   return L;
-}
+}  // init
 
-/**
- * Insert data into a sequential linked list.
- */
-int insertList(seqList *L, int i, int x) {
-  if (L->last == MAX_SIZE - 1) {
-    printf("The space is insufficient.\n");
-    return -1;
-  }
-  if (i < 1 || i > L->last + 2) {
-    printf("Index error.\n");
-    return 0;
-  }
-  for (int j = L->last; j > i - 1; j--) {
-    L->data[j + 1] = L->data[j];
-    L->data[i - 1] = x;  // insert data
-    L->last += 1;        // get last element index
-    return 0;
-  }
-  return 0;
-}
-
-int delList(seqList *L, int i) {
-  int j = 0;
-  // Check the legality of empty table and delete position
-  if (i < 1 || i > L->last + 1) {
-    printf("data is not exist!.\n");
-    return 0;
-  }
-  for (j = i; j <= L->last; j++) {
-    L->data[j - 1] = L->data[j];  // Move to the previous digit
-  }
-  L->last--;
-  return 0;  // Del success
-}
-
-/**
- * find data is exist
- */
-int find(seqList *L, int x) {
+// insert value to node index
+int insert(sqList *L, int pos, int data) {
   int i = 0;
-  while (i <= L->last && L->data[i] != x) {
-    i++;
+  sqList *node;
+  node = L;
+  if (pos < 1 && pos > L->length + 1) exit(0);
+  if (L->length >= maxSize) {
+    // Increase storage space
+    sqList *add;
+    add = (sqList *)realloc(L, (maxSize + increase) * sizeof(sqList));
+    if (!add) exit(0);
+    L = add;                // 传递新地址
+    L->length += increase;  // 增加存储容量
   }
-  if (i > L->last)
-    return -1;
-  else
-    return i;
+  while (i < pos - 1) {
+    node = node->next;
+    i += 1;
+  }
+  sqList *p_new;
+  p_new = (sqList *)malloc(sizeof(sqList));
+  p_new->data = data;
+  node = node->next;
+  node->next = p_new;
+  p_new->next = node;
   return 0;
 }
 
 int main() {
-  seqList *L;
-  L = initList();
-  insertList(L, 1, 5);
+  sqList *L;
+  L = init();
+  insert(L, 1, 10);
+  printf("Length:%d\n", L->length);
   return 0;
 }

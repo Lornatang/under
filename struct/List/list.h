@@ -1,24 +1,29 @@
 #ifndef LIST_H
 #define LIST_H
-#define MAX_SIZE 100
+#ifndef MAX_SIZE
+#define maxSize 10
+#define increase 2
+#endif  // MAX_SIZE
 
 typedef struct Sequential {
+  int data;
   int length;
   struct Sequential *next;
-} seqList;
+} sqList;
 
 // Initializes a sequential list with a capacity of 100
-seqList *initList();
+sqList *init();
 
 /**
  * Insert data into a sequential linked list.
  */
-int insertList(seqList *L, int i, int x);
+int insert(sqList *L, int i, int x);
 
-int delList(seqList *L, int i);
+// delete node value
+int del(sqList *L, int i);
 
 /**
  * find data is exist
  */
-int find(seqList *L, int x);
+int find(sqList *L, int x);
 #endif  // LIST_H
