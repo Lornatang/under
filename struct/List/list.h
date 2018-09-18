@@ -3,8 +3,8 @@
 #define MAX_SIZE 100
 
 typedef struct Sequential {
-  int data[MAX_SIZE];
-  int last;
+  int length;
+  struct Sequential *next;
 } seqList;
 
 // Initializes a sequential list with a capacity of 100
