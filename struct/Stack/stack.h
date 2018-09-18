@@ -20,7 +20,7 @@ int push(sqStack *s, int data);
 void print(sqStack *s);
 
 // pop node
-int pop(sqStack *s, int data);
+int pop(sqStack *s, int *data);
 
 #define STACK_H
 #endif
