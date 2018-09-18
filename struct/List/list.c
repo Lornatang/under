@@ -70,39 +70,35 @@ sqList *merge(sqList *A, sqList *B) {
   sqList *end = NULL;
   // 如果第一个结点为空，返回第二个链表头结点
   // 如果第二个结点为空，返回第一个链表头结点
-  if (!A)
-    return B;
-  else if (!B)
-    return A;
+  if (!A) return B;
+  if (!B) return A;
 
-  else {
-    //确定头指针
+  //确定头指针
+  if (A->data < B->data) {
+    beg = A;
+    A = A->next;  //指向链表的第二个结点
+  } else {
+    beg = B;
+    B = B->next;
+  }
+  end = beg;  //指向第一个结点
+  while (A != NULL && B != NULL) {
     if (A->data < B->data) {
-      beg = A;
-      A = A->next;  //指向链表的第二个结点
+      end->next = A;
+      A = A->next;
     } else {
-      beg = B;
+      end->next = B;
       B = B->next;
     }
-    end = beg;  //指向第一个结点
-    while (A && B) {
-      if (A->data <= B->data) {
-        end->next = A;
-        A = A->next;
-      } else {
-        end->next = B;
-        B = B->next;
-      }
-      end = end->next;
-    }
-
-    if (!A)
-      end->next = B;
-    else if (!B)
-      end->next = A;
-
-    return beg->next;
+    end = end->next;
   }
+
+  if (!A)
+    end->next = B;
+  else if (!B)
+    end->next = A;
+
+  return beg->next;
 }
 
 int main() {
@@ -115,7 +111,7 @@ int main() {
   insert(L, 2, 2);
   insert(L, 3, 3);
   insert(L, 4, 4);
-  insert(L, 5, 5);
+  insert(L, 5, 6);
   insert(B, 1, 6);
   insert(B, 2, 7);
   insert(B, 3, 8);
