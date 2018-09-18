@@ -36,7 +36,7 @@ void print(sqStack *s) {
   if (s->top == 0) {
     printf("It is empty\n");
   }
-  /*stack -> top，栈的长度*/
+  /*s -> top，栈的长度*/
   else {
     for (i = 0; i < s->top; i++) printf("Stack data：%d\n", s->a[i]);
   }
@@ -46,7 +46,7 @@ int main() {
   int h = 4;
   int p = 0;
   int i = 0;
-  int u = 3;
+  int x = 3;
   sqStack *s;
 
   s = init();
@@ -57,18 +57,18 @@ int main() {
   print(s);
 
   /*弹出操作*/
-  pop(s, &u);
-  printf("弹出的元素是：%d\n", u);
-  pop(s, &u);
-  printf("弹出的元素是：%d\n", u);
-  pop(s, &u);
-  printf("弹出的元素是：%d\n", u);
-  pop(s, &u);
-  printf("弹出的元素是：%d\n", u);
-  pop(s, &u);
-  printf("弹出的元素是：%d\n", u);
-  pop(s, &u);
-  printf("%d\n", u);
+  pop(s, &x);
+  printf("弹出的元素是：%d\n", x);
+  pop(s, &x);
+  printf("弹出的元素是：%d\n", x);
+  pop(s, &x);
+  printf("弹出的元素是：%d\n", x);
+  pop(s, &x);
+  printf("弹出的元素是：%d\n", x);
+  pop(s, &x);
+  printf("弹出的元素是：%d\n", x);
+  pop(s, &x);
+  printf("%d\n", x);
 
   return 0;
 }
