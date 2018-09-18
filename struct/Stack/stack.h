@@ -1,6 +1,12 @@
 #ifndef STACK_H
+
+#ifndef MAX_SIZE
+#define MAX_SIZE
+#define maxSize 100
+#endif
+
 typedef struct Stack {
-  int a[20];
+  int a[maxSize];
   int top;
 } sqStack;
 
