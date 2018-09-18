@@ -29,4 +29,6 @@ int find(sqList *L, int x);
 // get List length
 int getLength(sqList *L);
 
+sqList *merge(sqList *A, sqList *B);
+
 #endif  // LIST_H
