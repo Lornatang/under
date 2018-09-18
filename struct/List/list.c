@@ -8,7 +8,6 @@ sqList *init() {
   L = (sqList *)malloc(sizeof(sqList));
   if (!L) exit(0);
   L->next = NULL;
-  L->data = 0;
   return L;
 }  // init
 
@@ -67,37 +66,43 @@ int find(sqList *L, int data) {
 
 // Merge list
 sqList *merge(sqList *A, sqList *B) {
-  // if (!A) {
-  //   return B;
-  // }
-  // if (!B) {
-  //   return A;
-  // }
-  // sqList *L = NULL;
-  // if (A->next < B->next) {
-  //   L = A;
-  //   L->next = merge(A->next, B);
-  // } else {
-  //   L = B;
-  //   L->next = merge(A, B->next);
-  // }
-  // return L;
-  if (!A) {
+  sqList *beg = NULL;
+  sqList *end = NULL;
+  // 如果第一个结点为空，返回第二个链表头结点
+  // 如果第二个结点为空，返回第一个链表头结点
+  if (!A)
     return B;
-  }
-  if (!B) {
+  else if (!B)
     return A;
-  }
-  sqList *L;
-  if (A->next < B->next) {
-    L = A;
-    L->next = merge(A->next, B);
-  } else {
-    L = B;
-    L->next = merge(A, B->next);
-  }
 
-  return L;
+  else {
+    //确定头指针
+    if (A->data < B->data) {
+      beg = A;
+      A = A->next;  //指向链表的第二个结点
+    } else {
+      beg = B;
+      B = B->next;
+    }
+    end = beg;  //指向第一个结点
+    while (A && B) {
+      if (A->data <= B->data) {
+        end->next = A;
+        A = A->next;
+      } else {
+        end->next = B;
+        B = B->next;
+      }
+      end = end->next;
+    }
+
+    if (!A)
+      end->next = B;
+    else if (!B)
+      end->next = A;
+
+    return beg->next;
+  }
 }
 
 int main() {
@@ -106,7 +111,6 @@ int main() {
   sqList *C;
   L = init();
   B = init();
-  C = init();
   insert(L, 1, 1);
   insert(L, 2, 2);
   insert(L, 3, 3);
