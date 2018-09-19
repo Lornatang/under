@@ -6,11 +6,11 @@
 typedef struct node {
   int data;
   struct node *next;
-} Node, *linkList;
+} node, *linkList;
 
 linkList linkListInit() {
-  Node *L;
-  L = (Node *)malloc(sizeof(Node));
+  node *L;
+  L = (node *)malloc(sizeof(node));
   if (L == NULL) printf("Space error.\n");
   L->next = NULL;
   return L;
@@ -18,15 +18,15 @@ linkList linkListInit() {
 
 // List head insertion
 linkList linkListCreateH() {
-  Node *L;
+  node *L;
   int x = 0;
-  L = (Node *)malloc(sizeof(Node));
+  L = (node *)malloc(sizeof(node));
   L->next = NULL;
 
   while (scanf("%d", &x) != EOF) {
-    Node *p;
-    p = (Node *)malloc(sizeof(Node));  // Apply for new node
-    p->data = x;                       // Node data field assignment
+    node *p;
+    p = (node *)malloc(sizeof(node));  // Apply for new node
+    p->data = x;                       // node data field assignment
     p->next = L->next;  // Insert the node into the header L-->|2|-->|1|-->NULL
     L->next = p;
   }
@@ -36,11 +36,11 @@ linkList linkListCreateH() {
 // Insert at the end of the list
 linkList linkListCreateT() {
   linkList L = NULL;
-  Node *s, *r = NULL;
+  node *s, *r = NULL;
   int x;
   scanf("%d", &x); /* sets the type of data element to be int*/
   while (x != EOF) {
-    s = (Node *)malloc(sizeof(Node));
+    s = (node *)malloc(sizeof(node));
     s->data = x;
     if (L == NULL)
       L = s; /* the processing of the first node */
@@ -56,7 +56,7 @@ linkList linkListCreateT() {
 }
 
 linkList linkListDel(linkList L, int data) {
-  Node *beg, *p;
+  node *beg, *p;
   p = L->next;
   while (p->data != data) {
     beg = p;
@@ -74,7 +74,7 @@ linkList linkListDel(linkList L, int data) {
  * counter is added 1.
  */
 int getLength(linkList L) {
-  Node *p = L;
+  node *p = L;
   int j = 0;
   if (p == NULL) return 0;
   j = 1;
@@ -91,8 +91,8 @@ int getLength(linkList L) {
  * node, otherwise continue the last one, and end the table. Return empty if not
  * found.
  */
-Node *find(linkList L, int x) {
-  Node *p = L->next;
+node *find(linkList L, int x) {
+  node *p = L->next;
   while (p != NULL && p->data != x) {
     p = p->next;
     return p;
