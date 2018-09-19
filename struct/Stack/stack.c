@@ -3,25 +3,30 @@
 #include <stdlib.h>
 
 sqStack *init() {
-  sqStack *s = NULL;
-  s = (sqStack *)malloc(sizeof(sqStack));
-  if (s == NULL) {
-    printf("No memory!\n");
-    exit(0);
-  }
-  if (s) {
-    s->top = 0;
-  }
-  return s;
+  sqStack *S = NULL;
+  S = (sqStack *)malloc(sizeof(sqStack));
+  if (!S) exit(0);
+  S->top = 0;
+  return S;
+}  // init struct
+
+int getTop(sqStack *S) {
+  sqStack *node;
+  if (S->top == S->base) return false;
+  node->top = S->top - 1;
+  return node->data;
 }
 
-int push(sqStack *s, int data) {
-  s->a[s->top] = data;
-  s->top += 1;
-  return 0;
+sqStack *push(sqStack *S, int data) {
+  sqStack *node;
+  node = S;
+  node = (sqStack *)malloc(sizeof(sqStack));
+  if (!node) exit(0);
+  *node->top++ = data;
+  return S;
 }
 
-int pop(sqStack *s, int *data) {
+sqStack *pop(sqStack *s, int *data) {
   if (s->top == 0)
     printf("Stack is empty.\n");
   else {
