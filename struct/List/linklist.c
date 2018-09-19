@@ -98,7 +98,27 @@ node *find(linkList L, int x) {
 }
 
 // merger list_A and list_B
-void merge(linkList A, linkList B, linkList L);
+linkList merge(linkList A, linkList B, linkList L) {
+  linkList p = NULL;
+  p = L;
+
+  if (!A) return B;
+  if (!B) return A;
+
+  while (!A && !B) {
+    if (A->data < B->data) {
+      L->next = A;
+      A = A->next;
+    } else {
+      L->next = B;
+      B = B->next;
+    }
+    L->next = A ? A : B;
+    free(B);
+  }
+
+  return L;
+}
 
 int main() {
   linkList list, start;

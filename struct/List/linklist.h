@@ -35,6 +35,6 @@ int getLength(linkList L);
 node *find(linkList L, int x);
 
 // merger list_A and list_B
-void merge(linkList A, linkList B, linkList L);
+linkList merge(linkList A, linkList B, linkList L);
 
 #endif  // LIST_H
