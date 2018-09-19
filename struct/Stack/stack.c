@@ -25,7 +25,7 @@ int getTop(sqStack *S) {
 
 // push node to stack
 int push(sqStack *S, int data) {
-  if (S->top - S->base )
+  if (S->top - S->base)
     return 0; /*栈满不能入栈*/
   else {
     S->top++;
