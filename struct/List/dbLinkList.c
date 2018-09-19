@@ -78,7 +78,7 @@ int getLength(pNode L) {
 }
 
 //向双向链表中插入节点
-int insert(pNode L, int pos, int data) {
+pNode insert(pNode L, int pos, int data) {
   pNode pt = NULL, p_new = NULL;
 
   if (pos > 0 && pos < getLength(L) + 2) {
@@ -102,14 +102,14 @@ int insert(pNode L, int pos, int data) {
     p_new->pre = L;
     L->next = p_new;
 
-    return 1;
+    return L;
   } else
     return 0;
 }
 
 // 这部分是从链表中删除节点，当然这里和单向链表差不多，要注意的地方和插入节点时是一样的，上面已经说明了。
 // 从链表中删除节点
-int DeleteEleDbLinkList(pNode L, int pos) {
+pNode DeleteEleDbLinkList(pNode L, int pos) {
   pNode pt = NULL;
 
   if (pos > 0 && pos < getLength(L) + 1) {
@@ -124,7 +124,7 @@ int DeleteEleDbLinkList(pNode L, int pos) {
     L->next = pt;
     if (NULL != pt) pt->pre = L;
 
-    return 1;
+    return L;
   } else
     return 0;
 }
@@ -158,34 +158,34 @@ int main() {
     print(head);
   }
 
-  printf("请输入要插入节点的位置和元素值(两个数用空格隔开)：");
-  scanf("%d %d", &position, &value);
-  flag = insert(head, position, value);
-  if (flag) {
-    printf("插入节点成功！\n");
-    print(head);
-  } else
-    printf("插入节点失败！\n");
+  // printf("请输入要插入节点的位置和元素值(两个数用空格隔开)：");
+  // scanf("%d %d", &position, &value);
+  // flag = insert(head, position, value);
+  // if (flag) {
+  //   printf("插入节点成功！\n");
+  //   print(head);
+  // } else
+  //   printf("插入节点失败！\n");
 
-  flag = IsEmptyDbLinkList(head);
-  if (flag)
-    printf("双向链表为空，不能进行删除操作！\n");
-  else {
-    printf("请输入要删除节点的位置：");
-    scanf("%d", &position);
-    flag = DeleteEleDbLinkList(head, position);
-    if (flag) {
-      printf("删除节点成功！\n");
-      print(head);
-    } else
-      printf("删除节点失败！\n");
-  }
+  // flag = IsEmptyDbLinkList(head);
+  // if (flag)
+  //   printf("双向链表为空，不能进行删除操作！\n");
+  // else {
+  //   printf("请输入要删除节点的位置：");
+  //   scanf("%d", &position);
+  //   flag = DeleteEleDbLinkList(head, position);
+  //   if (flag) {
+  //     printf("删除节点成功！\n");
+  //     print(head);
+  //   } else
+  //     printf("删除节点失败！\n");
+  // }
 
-  FreeMemory(&head);
-  if (NULL == head)
-    printf("已成功删除双向链表，释放内存完成！\n");
-  else
-    printf("删除双向链表失败，释放内存未完成！\n");
+  // FreeMemory(&head);
+  // if (NULL == head)
+  //   printf("已成功删除双向链表，释放内存完成！\n");
+  // else
+  //   printf("删除双向链表失败，释放内存未完成！\n");
 
   return 0;
 }

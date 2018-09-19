@@ -8,7 +8,7 @@ typedef struct Node {
 } node, *pNode;
 
 // 创建双向链表
-pNode init(void);
+pNode init();
 
 // 打印链表
 void print(pNode L);
@@ -20,12 +20,20 @@ int isEmpty(pNode L);
 int getLength(pNode L);
 
 // 向链表插入节点
-int insert(pNode L, int pos, int data);
+pNode insert(pNode L, int pos, int data);
 
 // 从链表删除节点
-int del(pNode L, int pos);
+pNode del(pNode L, int pos);
 
 // 删除整个链表，释放内存
 void freeMemory(pNode *p);
 
+#endif
+
+#ifndef TRUE
+#define true 1
+#endif
+
+#ifndef FALSE
+#define false 0
 #endif
