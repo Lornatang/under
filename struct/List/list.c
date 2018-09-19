@@ -34,7 +34,7 @@ int getLength(sqList *L) {
 }
 
 sqList *delByPos(sqList *L, int data) {
-  sqList *node, *pre;  // pre为前驱结点，p为查找的结点。
+  sqList *node, *pre;  // pre为前驱结点，node为查找的结点。
   node = L->next;
   while (node->data != data) {  //查找值为x的元素
     pre = node;
