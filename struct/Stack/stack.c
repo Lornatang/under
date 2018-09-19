@@ -3,47 +3,53 @@
 #include <stdlib.h>
 
 sqStack *init() {
-  sqStack *S = NULL;
+  sqStack *S;
   S = (sqStack *)malloc(sizeof(sqStack));
   if (!S) exit(0);
-  S->top = 0;
+  S->data = 0;
+  S->top = S->base;
+  S->length = size;
   return S;
 }  // init struct
 
 int getTop(sqStack *S) {
   sqStack *node;
-  if (S->top == S->base) return false;
+  node = S;
+  if (S->top == S->base) {
+    printf("Empty stack.\n");
+    return 0;
+  }
   node->top = S->top - 1;
   return node->data;
+}  // get stack top
+
+// push node to stack
+int push(sqStack *S, int data) {
+  if (S->top - S->base )
+    return 0; /*栈满不能入栈*/
+  else {
+    S->top++;
+    S->data[S->top] = data;
+    return 1;
+  }
+}
 }
 
-sqStack *push(sqStack *S, int data) {
-  sqStack *node;
-  node = S;
-  node = (sqStack *)malloc(sizeof(sqStack));
-  if (!node) exit(0);
-  *node->top++ = data;
+sqStack *pop(sqStack *S, struct Stack data) {
+  if (S->top == S->base) {
+    printf("Empty stack.\n");
+    return 0;
+  }
+  data = *S->top--;
   return S;
 }
 
-sqStack *pop(sqStack *s, int *data) {
-  if (s->top == 0)
-    printf("Stack is empty.\n");
-  else {
-    s->top -= 1;
-    *data = s->a[s->top];
-  }
-  return 0;
-}
-
-void print(sqStack *s) {
-  int i = 0;
-  if (s->top == 0) {
-    printf("It is empty\n");
-  }
-  /*s -> top，栈的长度*/
-  else {
-    for (i = 0; i < s->top; i++) printf("Stack data：%d\n", s->a[i]);
+void print(sqStack *S) {
+  sqStack *node;
+  node = S;
+  while (!node->top) {
+    printf("Value: %d\n", node->data);
+    node = node->top;
   }
 }
 
@@ -52,27 +58,27 @@ int main() {
   int p = 0;
   int i = 0;
   int x = 3;
-  sqStack *s;
+  sqStack *S;
 
-  s = init();
+  S = init();
 
   for (i = 0; i < 5; i++) {
-    push(s, i);
+    push(S, i);
   }
-  print(s);
+  print(S);
 
   /*弹出操作*/
-  pop(s, &x);
+  pop(S, &x);
   printf("弹出的元素是：%d\n", x);
-  pop(s, &x);
+  pop(S, &x);
   printf("弹出的元素是：%d\n", x);
-  pop(s, &x);
+  pop(S, &x);
   printf("弹出的元素是：%d\n", x);
-  pop(s, &x);
+  pop(S, &x);
   printf("弹出的元素是：%d\n", x);
-  pop(s, &x);
+  pop(S, &x);
   printf("弹出的元素是：%d\n", x);
-  pop(s, &x);
+  pop(S, &x);
   printf("%d\n", x);
 
   return 0;
