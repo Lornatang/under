@@ -1,11 +1,13 @@
 #include "cycle.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 pNode init() {
   int i, length = 0, data = 0;
   pNode L = NULL;
   pNode end = NULL;
 
-  L = (pNode)malloc(sizeof(Node));
+  L = (pNode)malloc(sizeof(node));
 
   if (L == NULL) {
     printf("space error!.\n");
@@ -19,7 +21,7 @@ pNode init() {
   scanf("%d", &length);
 
   for (i = 1; i < length; i++) {
-    pNode p = (pNode)malloc(sizeof(Node));
+    pNode p = (pNode)malloc(sizeof(node));
 
     if (p == NULL) {
       printf("space error!.\n");
@@ -67,10 +69,10 @@ int getLength(pNode L) {
 }
 
 //向链表中插入节点
-int insert(pNode L, int pos, int data) {
+pNode insert(pNode L, int pos, int data) {
   pNode p = NULL;
   if (pos > 0 && pos < getLength(L) + 2) {
-    p = (pNode)malloc(sizeof(Node));
+    p = (pNode)malloc(sizeof(node));
 
     if (p == NULL) {
       printf("space error!.\n");
@@ -91,7 +93,7 @@ int insert(pNode L, int pos, int data) {
 }
 
 //从链表中删除节点
-int del(pNode L, int pos) {
+pNode del(pNode L, int pos) {
   pNode p = NULL;
 
   if (pos > 0 && pos < getLength(L) + 1) {
