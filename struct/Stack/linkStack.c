@@ -17,6 +17,7 @@ int isEmpty(linkStack S) {
     return 0;
 }  // judge stack is empty.
 
+// push node
 linkStack push(linkStack S, int data) {
   linkStack node;
   node = (linkStack)malloc(sizeof(stack));
@@ -27,6 +28,7 @@ linkStack push(linkStack S, int data) {
   return S;
 }
 
+// pop node
 linkStack pop(linkStack S, int *data) {
   linkStack node;
   if (S->next == NULL)
@@ -40,6 +42,7 @@ linkStack pop(linkStack S, int *data) {
   }
 }
 
+// print stack node value.
 void dis(linkStack S) {
   linkStack node;
   node = S->next;
@@ -47,6 +50,22 @@ void dis(linkStack S) {
     printf("Value: %d.\n", node->data);
     node = node->next;
   }
+}
+
+// Numerical transformation
+void conv() {
+  linkStack S;
+  S = init();
+  int x = 0;
+  printf("Input decimal number.\n");
+
+  while (scanf("%d", &x)) {
+    push(S, x % 8);
+    x = x / 8;
+  }
+  int *y;
+  pop(S, y);
+  printf("Value: %d", *y);
 }
 
 int main() {
@@ -60,6 +79,7 @@ int main() {
   push(S, 4);
   push(S, 5);
   push(S, 6);
+  dis(S);
 
   int data1 = 1;
   int data2 = 2;
@@ -68,5 +88,6 @@ int main() {
   pop(S, &data2);
   pop(S, &data3);
 
+  // conv();
   return 0;
 }
