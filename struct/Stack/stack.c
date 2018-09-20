@@ -35,35 +35,18 @@ sqStack *push(sqStack *S, sqStack data) {
   return 0;
 }
 
-sqStack *pop(sqStack *S, sqStack data) {
+sqStack *pop(sqStack *S) {
+  sqStack data;
   if (S->top == S->base) return 0;
 
   data = *--S->top;
   return 0;
 }
 
-void print(sqStack *S) {
-  sqStack *node;
-  node = S->top;
-  while (!node) {
-    printf("Value: %d\n", node->top);
-    node = node->top;
-  }
-}
-
 int main() {
-  int h = 4;
-  int p = 0;
-  int i = 0;
-  int x = 3;
   sqStack *S;
-
   S = init();
 
-  for (i = 0; i < 5; i++) {
-    push(S, i);
-  }
-  print(S);
-
+  free(S);
   return 0;
 }

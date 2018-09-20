@@ -22,13 +22,13 @@ typedef struct Stack {
 sqStack *init();
 
 // push node
-sqStack *push(sqStack *S, int data);
+sqStack *push(sqStack *S, sqStack data);
 
 // print value of node
 void print(sqStack *S);
 
 // pop node
-sqStack *pop(sqStack *S, int data);
+sqStack *pop(sqStack *S);
 
 #define STACK_H
 #endif
