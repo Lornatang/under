@@ -59,7 +59,7 @@ void dis(queue *node) {
 int main() {
   seQueue Q;
   Q = init();
-  int data = 4;
+  // int data = 4;
   // push(Q, data);
   // push(Q, data);
   // push(Q, data);
