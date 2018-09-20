@@ -24,12 +24,12 @@ seQueue init();
 seQueue destory(seQueue Q);
 
 // push value to queue
-int push(seQueue Q, int data);
+int puh(seQueue Q, int data);
 
 // pop value to queue
 int pop(seQueue Q, int *data);
 
 // print value
-void dis(seQueue Q);
+void dis(queue *node);
 
 #endif  // QUEUE_H

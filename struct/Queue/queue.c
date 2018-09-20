@@ -5,12 +5,10 @@
 // init queue node
 seQueue init() {
   seQueue Q;
-  queue *q;
   Q->front = Q->rear = (queuePtr)malloc(sizeof(queue));
   if (!Q->front) exit(0);
 
   Q->front->next = NULL;
-  q->num = 0;
   return Q;
 }  // init queue
 
@@ -37,6 +35,7 @@ int push(seQueue Q, int data) {
   return 0;
 }
 
+// pop node to queue
 int pop(seQueue Q, int *data) {
   queue *node;
   if (Q->front == Q->rear) return -1;
@@ -48,6 +47,7 @@ int pop(seQueue Q, int *data) {
   return 0;
 }
 
+// print node value
 void dis(queue *node) {
   node = node->next;
   while (node != NULL) {
@@ -57,5 +57,16 @@ void dis(queue *node) {
 }
 
 int main() {
-  
+  seQueue Q;
+  Q = init();
+  int data = 4;
+  // push(Q, data);
+  // push(Q, data);
+  // push(Q, data);
+
+  // pop(Q, &data);
+  // pop(Q, &data);
+  // pop(Q, &data);
+
+  return 0;
 }
