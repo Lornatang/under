@@ -20,6 +20,7 @@ int isEmpty(linkStack S) {
 linkStack push(linkStack S, int data) {
   linkStack node;
   node = (linkStack)malloc(sizeof(stack));
+  if (!node) exit(0);
   node->data = data;
   node->next = S;
   S = node;
