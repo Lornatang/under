@@ -12,7 +12,6 @@
 #endif
 
 typedef struct Stack {
-  int data;
   struct Stack *top;
   struct Stack *base;
 

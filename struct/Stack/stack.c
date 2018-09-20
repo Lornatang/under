@@ -4,23 +4,21 @@
 
 sqStack *init() {
   sqStack *S;
-  S = (sqStack *)malloc(sizeof(sqStack));
-  if (!S) exit(0);
-  S->data = 0;
+  S->base = (sqStack *)malloc(size * sizeof(sqStack));
+  if (!S->base) exit(0);
   S->top = S->base;
   S->length = size;
   return S;
 }  // init struct
 
-int getTop(sqStack *S) {
+sqStack *getTop(sqStack *S) {
   sqStack *node;
   node = S;
-  if (S->top == S->base) {
-    printf("Empty stack.\n");
-    return 0;
-  }
-  node->top = S->top - 1;
-  return node->data;
+  int data = 0;
+  if (S->top == S->base) exit(0);
+
+  node = S->top - 1;
+  return node;
 }  // get stack top
 
 // push node to stack
