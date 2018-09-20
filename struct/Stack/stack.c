@@ -15,38 +15,38 @@ sqStack *getTop(sqStack *S) {
   sqStack *node;
   node = S;
   int data = 0;
-  if (S->top == S->base) exit(0);
+  if (S->top == S->base) return 0;
 
   node = S->top - 1;
   return node;
 }  // get stack top
 
 // push node to stack
-int push(sqStack *S, int data) {
-  if (S->top - S->base)
-    return 0; /*栈满不能入栈*/
-  else {
-    S->top++;
-    S->data[S->top] = data;
-    return 1;
+sqStack *push(sqStack *S, sqStack data) {
+  if (S->top - S->base >= S->length) {
+    S->base = (sqStack *)realloc(S->base, (size + increase) * sizeof(sqStack));
+
+    if (!S->base) exit(0);
+
+    S->top = S->base + S->length;
+    S->length += increase;
   }
-}
+  *S->top++ = data;
+  return 0;
 }
 
-sqStack *pop(sqStack *S, struct Stack data) {
-  if (S->top == S->base) {
-    printf("Empty stack.\n");
-    return 0;
-  }
-  data = *S->top--;
-  return S;
+sqStack *pop(sqStack *S, sqStack data) {
+  if (S->top == S->base) return 0;
+
+  data = *--S->top;
+  return 0;
 }
 
 void print(sqStack *S) {
   sqStack *node;
-  node = S;
-  while (!node->top) {
-    printf("Value: %d\n", node->data);
+  node = S->top;
+  while (!node) {
+    printf("Value: %d\n", node->top);
     node = node->top;
   }
 }
@@ -64,20 +64,6 @@ int main() {
     push(S, i);
   }
   print(S);
-
-  /*弹出操作*/
-  pop(S, &x);
-  printf("弹出的元素是：%d\n", x);
-  pop(S, &x);
-  printf("弹出的元素是：%d\n", x);
-  pop(S, &x);
-  printf("弹出的元素是：%d\n", x);
-  pop(S, &x);
-  printf("弹出的元素是：%d\n", x);
-  pop(S, &x);
-  printf("弹出的元素是：%d\n", x);
-  pop(S, &x);
-  printf("%d\n", x);
 
   return 0;
 }
