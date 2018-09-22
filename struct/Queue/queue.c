@@ -41,10 +41,10 @@ int del(pQueue Q) {
 
 void dis(pQueue Q) {
   if (isEmpty(Q)) {
-    printf("空队列\n");
+    printf("Queue is empty!\n");
     return;
   }
-  printf("打印队列数据元素：\n");
+  printf("Print queue:\t");
   int index = Q->front;
   int i;
   for (i = 0; i < Q->size; i++) {
@@ -52,10 +52,10 @@ void dis(pQueue Q) {
     index %= max_size;
     printf("%d ", Q->data[index]);
   }
-  printf("\n");
+  putchar('\n');
 }
 
-int main(int argc, const char* argv[]) {
+int main() {
   pQueue Q = init();
 
   insert(Q, 0);
