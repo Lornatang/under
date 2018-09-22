@@ -13,22 +13,24 @@ pQueue init() {
 
 int IsFull(pQueue Q) { return (Q->size == max_size); }
 
-void insert(pQueue Q, int item) {
+int insert(pQueue Q, int data) {
   if (IsFull(Q)) {
     printf("Queue is full!\n");
-    return;
+    return 1;
   }
   Q->rear++;
   Q->rear %= max_size;
   Q->size++;
-  Q->data[Q->rear] = item;
+  Q->data[Q->rear] = data;
+
+  return 0;
 }
 
 int isEmpty(pQueue Q) { return (Q->size == 0); }
 
 int del(pQueue Q) {
   if (isEmpty(Q)) {
-    printf("空队列\n");
+    printf("Queue is empty!\n");
     return 1;
   }
   Q->front++;

@@ -20,7 +20,7 @@ pQueue init();
 int isFull(pQueue Q);
 
 // insert node to Q
-void insert(pQueue Q, int data);
+int insert(pQueue Q, int data);
 
 // check Q is empty
 int isEmpty(pQueue Q);
