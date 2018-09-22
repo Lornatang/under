@@ -1,10 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef QUEUE_H
+#define QUEUE_H
 
-#ifndef MAXSIZEmax
+#ifndef MAXSIZE
 #define max_size 6  // 存储数据元素的最大个数
 #define increase 2  // 超过元素最大个数后每次多增加两个元素空间
-#endif              // MAXSIZEmax
+#endif              // MAXSIZE
 
 typedef struct {
   int data[max_size];
@@ -14,79 +14,21 @@ typedef struct {
 } queue, *pQueue;
 
 // init queue
-queue* init();
+pQueue init();
 
-pQueue init() {
-  pQueue q = (queue*)malloc(sizeof(queue));
-  if (!q) exit(0);
-  q->front = -1;
-  q->rear = -1;
-  q->size = 0;
-  return q;
-}
+// check Q is full
+int isFull(pQueue Q);
 
-int IsFullQ(queue* q) { return (q->size == max_size); }
+// insert node to Q
+void insert(pQueue Q, int data);
 
-void AddQ(queue* q, int item) {
-  if (IsFullQ(q)) {
-    printf("队列已满\n");
-    return;
-  }
-  q->rear++;
-  q->rear %= max_size;
-  q->size++;
-  q->data[q->rear] = item;
-}
+// check Q is empty
+int isEmpty(pQueue Q);
 
-int IsEmptyQ(queue* q) { return (q->size == 0); }
+// delete node for Q
+int del(pQueue Q);
 
-int DeleteQ(queue* q) {
-  if (IsEmptyQ(q)) {
-    printf("空队列\n");
-    return 1;
-  }
-  q->front++;
-  q->front %= max_size;  // 0 1 2 3 4 5
-  q->size--;
-  return q->data[q->front];
-}
+// print Q value
+void dis(pQueue Q);
 
-void PrintQueue(queue* q) {
-  if (IsEmptyQ(q)) {
-    printf("空队列\n");
-    return;
-  }
-  printf("打印队列数据元素：\n");
-  int index = q->front;
-  int i;
-  for (i = 0; i < q->size; i++) {
-    index++;
-    index %= max_size;
-    printf("%d ", q->data[index]);
-  }
-  printf("\n");
-}
-
-int main(int argc, const char* argv[]) {
-  queue* q = init();
-
-  AddQ(q, 0);
-  AddQ(q, 1);
-  AddQ(q, 2);
-  AddQ(q, 3);
-  AddQ(q, 4);
-  AddQ(q, 5);
-  PrintQueue(q);
-
-  DeleteQ(q);
-  DeleteQ(q);
-  DeleteQ(q);
-  PrintQueue(q);
-
-  AddQ(q, 6);
-  AddQ(q, 7);
-  AddQ(q, 8);
-  PrintQueue(q);
-
-  return 0;
-}
+#endif  // QUEUE_H
