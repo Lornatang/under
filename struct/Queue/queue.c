@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 pQueue init() {
-  pQueue q = (queue*)malloc(sizeof(queue));
+  pQueue q = (pQueue)malloc(sizeof(pQueue));
   if (!q) exit(0);
   q->front = -1;
   q->rear = -1;
@@ -11,9 +11,9 @@ pQueue init() {
   return q;
 }
 
-int IsFullQ(queue* q) { return (q->size == max_size); }
+int IsFullQ(pQueue q) { return (q->size == max_size); }
 
-void AddQ(queue* q, int item) {
+void AddQ(pQueue q, int item) {
   if (IsFullQ(q)) {
     printf("队列已满\n");
     return;
@@ -24,9 +24,9 @@ void AddQ(queue* q, int item) {
   q->data[q->rear] = item;
 }
 
-int IsEmptyQ(queue* q) { return (q->size == 0); }
+int IsEmptyQ(pQueue q) { return (q->size == 0); }
 
-int DeleteQ(queue* q) {
+int DeleteQ(pQueue q) {
   if (IsEmptyQ(q)) {
     printf("空队列\n");
     return 1;
@@ -37,7 +37,7 @@ int DeleteQ(queue* q) {
   return q->data[q->front];
 }
 
-void PrintQueue(queue* q) {
+void PrintQueue(pQueue q) {
   if (IsEmptyQ(q)) {
     printf("空队列\n");
     return;
@@ -54,7 +54,7 @@ void PrintQueue(queue* q) {
 }
 
 int main(int argc, const char* argv[]) {
-  queue* q = init();
+  pQueue q = init();
 
   AddQ(q, 0);
   AddQ(q, 1);
