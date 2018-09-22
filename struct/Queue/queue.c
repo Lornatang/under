@@ -3,76 +3,76 @@
 #include <stdlib.h>
 
 pQueue init() {
-  pQueue q = (pQueue)malloc(sizeof(pQueue));
-  if (!q) exit(0);
-  q->front = -1;
-  q->rear = -1;
-  q->size = 0;
-  return q;
+  pQueue Q = (pQueue)malloc(sizeof(pQueue));
+  if (!Q) exit(0);
+  Q->front = -1;
+  Q->rear = -1;
+  Q->size = 0;
+  return Q;
 }
 
-int IsFullQ(pQueue q) { return (q->size == max_size); }
+int IsFull(pQueue Q) { return (Q->size == max_size); }
 
-void AddQ(pQueue q, int item) {
-  if (IsFullQ(q)) {
+void AddQ(pQueue Q, int item) {
+  if (IsFull(Q)) {
     printf("队列已满\n");
     return;
   }
-  q->rear++;
-  q->rear %= max_size;
-  q->size++;
-  q->data[q->rear] = item;
+  Q->rear++;
+  Q->rear %= max_size;
+  Q->size++;
+  Q->data[Q->rear] = item;
 }
 
-int IsEmptyQ(pQueue q) { return (q->size == 0); }
+int IsEmptyQ(pQueue Q) { return (Q->size == 0); }
 
-int DeleteQ(pQueue q) {
-  if (IsEmptyQ(q)) {
+int DeleteQ(pQueue Q) {
+  if (IsEmptyQ(Q)) {
     printf("空队列\n");
     return 1;
   }
-  q->front++;
-  q->front %= max_size;  // 0 1 2 3 4 5
-  q->size--;
-  return q->data[q->front];
+  Q->front++;
+  Q->front %= max_size;  // 0 1 2 3 4 5
+  Q->size--;
+  return Q->data[Q->front];
 }
 
-void PrintQueue(pQueue q) {
-  if (IsEmptyQ(q)) {
+void PrintQueue(pQueue Q) {
+  if (IsEmptyQ(Q)) {
     printf("空队列\n");
     return;
   }
   printf("打印队列数据元素：\n");
-  int index = q->front;
+  int index = Q->front;
   int i;
-  for (i = 0; i < q->size; i++) {
+  for (i = 0; i < Q->size; i++) {
     index++;
     index %= max_size;
-    printf("%d ", q->data[index]);
+    printf("%d ", Q->data[index]);
   }
   printf("\n");
 }
 
 int main(int argc, const char* argv[]) {
-  pQueue q = init();
+  pQueue Q = init();
 
-  AddQ(q, 0);
-  AddQ(q, 1);
-  AddQ(q, 2);
-  AddQ(q, 3);
-  AddQ(q, 4);
-  AddQ(q, 5);
-  PrintQueue(q);
+  AddQ(Q, 0);
+  AddQ(Q, 1);
+  AddQ(Q, 2);
+  AddQ(Q, 3);
+  AddQ(Q, 4);
+  AddQ(Q, 5);
+  PrintQueue(Q);
 
-  DeleteQ(q);
-  DeleteQ(q);
-  DeleteQ(q);
-  PrintQueue(q);
+  DeleteQ(Q);
+  DeleteQ(Q);
+  DeleteQ(Q);
+  PrintQueue(Q);
 
-  AddQ(q, 6);
-  AddQ(q, 7);
-  AddQ(q, 8);
-  PrintQueue(q);
+  AddQ(Q, 6);
+  AddQ(Q, 7);
+  AddQ(Q, 8);
+  PrintQueue(Q);
 
   return 0;
 }
