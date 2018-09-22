@@ -9,7 +9,7 @@ typedef struct {
 typedef unsigned char string[255];
 
 // assign
-int strAssign(hString *S, char *chars);
+int strAssign(hString S, char *chars);
 
 // get heap string length
 int strLen(hString S);
@@ -18,7 +18,7 @@ int strLen(hString S);
 int strCompare(hString S, hString T);
 
 // clear string
-int clearStr(hString *S);
+int clearStr(hString S);
 
 // concat string S1 and string S1 to string T
 int concat(hString T, hString S1, hString S2);

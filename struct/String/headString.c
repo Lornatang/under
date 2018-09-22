@@ -3,20 +3,23 @@
 #include "heapString.h"
 
 // assign
-int strAssign(hString *S, char *chars) {
-  if (S->ch) free(S->ch);
+int strAssign(hString S, char *chars) {
+  if (S.ch) free(S.ch);
   char *c;
   int i = 0;
-  for (i = 0, c = chars; *c; i++, c++)
+  // get chars length
+  for (i = 0, c = chars; *c; ++i, ++c)
     ;
   if (!i) {
-    S->ch = NULL;
-    S->length = 0;
+    S.ch = NULL;
+    S.length = 0;
   } else {
-    S->ch = (char *)malloc(sizeof(char));
-    if (!S->ch) exit(0);
-    S->ch[i - 1] = chars[i - 1];
-    S->length = i;
+    S.ch = (char *)malloc(i * sizeof(char));
+    if (!S.ch) exit(0);
+    S.ch = chars;
+    S.length = i;
+    printf("%s\n", S.ch);
+    printf("%d\n", S.length);
   }
   return 0;
 }  // StrAssign
@@ -33,12 +36,12 @@ int strCompare(hString S, hString T) {
 }  // StrCompare
 
 // clear string
-int clearStr(hString *S) {
-  if (S->ch) {
-    free(S->ch);
-    S->ch = NULL;
+int clearStr(hString S) {
+  if (S.ch) {
+    free(S.ch);
+    S.ch = NULL;
   }
-  S->length = 0;
+  S.length = 0;
   return 0;
 }  // ClearStr
 
@@ -70,4 +73,14 @@ int subStr(hString S, int pos, int len) {
   return 0;
 }
 
-int main() { return 0; }
+int main() {
+  hString S;
+  hString T;
+  strAssign(S, "abc");
+  strAssign(T, "abcd");
+
+  printf("String S length: %d\n", strLen(S));
+  printf("String T length: %d\n", strLen(T));
+
+  return 0;
+}
