@@ -16,7 +16,6 @@ void enterqueue(linkqueue &q, int number, int time) {
   q.length++;
   p->number = number;
   p->cometime = time;
-  // sum+=p->finishtime; //统计每个人的排队时长
   p->next = NULL;
   q.rear->next = p;
   q.rear = p;
@@ -64,21 +63,6 @@ void Customer_Come() {
   scanf("%d", &time);
   printf("\n");
 
-  /*
-   if(one.length<=two.length&&one.length<=three.length&&one.length<=four.length){
-     enterqueue(one,number,time);
-   }
-   else
-   if(two.length<=one.length&&two.length<=three.length&&two.length<=four.length){
-     enterqueue(two,number,time);
-   }
-   else
-   if(three.length<=one.length&&three.length<=two.length&&three.length<=four.length){
-     enterqueue(three,number,time);
-   }
-   else{
-     enterqueue(four,number,time);
-   }*/
   printf("%d号顾客来到%d号窗口\n", number, getmin(q));
   enterqueue(q[getmin(q)], number, time);
 }
@@ -88,27 +72,7 @@ void Customer_Leave() {
   scanf("%d", &number);
   printf("输入当前时间:  ");
   scanf("%d", &time);
-  //从四个队的队首分别去找，因为离队的只能是队首。
-  /*  if(one.front->next->number==number){
-      printf("%d号客户办理完成业务从1号窗口离开\n",number);
-      popqueue(one);
-      break;
-    }
-     if(two.front->next->number==number){
-      printf("%d号客户办理完成业务从2号窗口离开\n",number);
-      popqueue(two);
-      break;
-    }
-     if(three.front->next->number==number){
-      printf("%d号客户办理完成业务从3号窗口离开\n",number);
-      popqueue(three);
-      break;
-    }
-     if (four.front->next->number==number){
-      printf("%d号客户办理完成业务从4号窗口离开\n",number);
-      popqueue(four);
-      break;
-    } */
+
   for (int i = 1; i <= 4; i++) {
     if (q[i].front->next->number == number) {
       sum += time - q[i].front->next->cometime;
