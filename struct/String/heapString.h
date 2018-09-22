@@ -6,6 +6,8 @@ typedef struct {
   int length;
 } hString;
 
+typedef unsigned char string[255];
+
 // assign
 int strAssign(hString *S, char *chars);
 
