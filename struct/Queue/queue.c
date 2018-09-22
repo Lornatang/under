@@ -40,10 +40,6 @@ int del(pQueue Q) {
 }
 
 void dis(pQueue Q) {
-  if (isEmpty(Q)) {
-    printf("Queue is empty!\n");
-    return;
-  }
   printf("Print queue:\t");
   int index = Q->front;
   int i;
