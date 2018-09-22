@@ -1,4 +1,4 @@
-#include "queue.h"
+#include "linkQueue.h"
 #include <stdio.h>
 #include <stdlib.h>
 
