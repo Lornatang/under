@@ -10,7 +10,7 @@ typedef struct {
 int strAssign(hString *S, char *chars);
 
 // get heap string length
-int strlen(hString S);
+int strLen(hString S);
 
 //  string S and string T compare
 int strCompare(hString S, hString T);
