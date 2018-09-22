@@ -13,9 +13,9 @@ pQueue init() {
 
 int IsFull(pQueue Q) { return (Q->size == max_size); }
 
-void AddQ(pQueue Q, int item) {
+void insert(pQueue Q, int item) {
   if (IsFull(Q)) {
-    printf("队列已满\n");
+    printf("Queue is full!\n");
     return;
   }
   Q->rear++;
@@ -24,10 +24,10 @@ void AddQ(pQueue Q, int item) {
   Q->data[Q->rear] = item;
 }
 
-int IsEmptyQ(pQueue Q) { return (Q->size == 0); }
+int isEmpty(pQueue Q) { return (Q->size == 0); }
 
-int DeleteQ(pQueue Q) {
-  if (IsEmptyQ(Q)) {
+int del(pQueue Q) {
+  if (isEmpty(Q)) {
     printf("空队列\n");
     return 1;
   }
@@ -37,8 +37,8 @@ int DeleteQ(pQueue Q) {
   return Q->data[Q->front];
 }
 
-void PrintQueue(pQueue Q) {
-  if (IsEmptyQ(Q)) {
+void dis(pQueue Q) {
+  if (isEmpty(Q)) {
     printf("空队列\n");
     return;
   }
@@ -56,23 +56,23 @@ void PrintQueue(pQueue Q) {
 int main(int argc, const char* argv[]) {
   pQueue Q = init();
 
-  AddQ(Q, 0);
-  AddQ(Q, 1);
-  AddQ(Q, 2);
-  AddQ(Q, 3);
-  AddQ(Q, 4);
-  AddQ(Q, 5);
-  PrintQueue(Q);
+  insert(Q, 0);
+  insert(Q, 1);
+  insert(Q, 2);
+  insert(Q, 3);
+  insert(Q, 4);
+  insert(Q, 5);
+  dis(Q);
 
-  DeleteQ(Q);
-  DeleteQ(Q);
-  DeleteQ(Q);
-  PrintQueue(Q);
+  del(Q);
+  del(Q);
+  del(Q);
+  dis(Q);
 
-  AddQ(Q, 6);
-  AddQ(Q, 7);
-  AddQ(Q, 8);
-  PrintQueue(Q);
+  insert(Q, 6);
+  insert(Q, 7);
+  insert(Q, 8);
+  dis(Q);
 
   return 0;
 }
