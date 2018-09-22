@@ -9,6 +9,7 @@ void initqueue(linkqueue &q) {
   q.front->next = NULL;
   q.length = 0;
 }
+
 void enterqueue(linkqueue &q, int number, int time) {
   person p;
   p = (person)malloc(sizeof(person));
@@ -20,6 +21,7 @@ void enterqueue(linkqueue &q, int number, int time) {
   q.rear->next = p;
   q.rear = p;
 }
+
 void popqueue(linkqueue &q) {
   person p;
   if (q.front == q.rear) {
@@ -32,6 +34,7 @@ void popqueue(linkqueue &q) {
     q.front = q.rear;
   }
 }
+
 int getmin(linkqueue q[]) {
   int temp = q[1].length;
   int j = 1;
@@ -43,6 +46,7 @@ int getmin(linkqueue q[]) {
   }
   return j;
 }
+
 int getmax(linkqueue q[]) {
   int temp = q[1].length;
   int j = 1;
@@ -83,6 +87,7 @@ void Customer_Leave() {
   }
   if (flag) printf("编号错误请重新输入\n");
 }
+
 void Adjust_Queue(linkqueue q[]) {
   int m = getmin(q);
   int n = getmax(q);
@@ -98,11 +103,13 @@ void Adjust_Queue(linkqueue q[]) {
   q[n].length--;
   q[m].length++;
 }
+
 void Close_Door() {
   printf("下班时间到，工作结束。\n");
   printf("今天共接待了%d位客户\n", cnt);
   printf("每位客户平均逗留时间为%.2f\n", (float)sum / cnt);
 }
+
 void welcome() {
   printf("    **************************   *************************\n");
   printf("    *   模拟银行排队系统  *   *  请输入号码选择功能 *\n");
@@ -116,6 +123,7 @@ void welcome() {
   printf("     当前四号队列人数：%3d                 \n", q[4].length);
   printf("    **************************   *************************\n");
 }
+
 int main() {
   for (int i = 1; i <= 4; i++) {
     initqueue(q[i]);
