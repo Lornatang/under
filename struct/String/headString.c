@@ -22,7 +22,7 @@ int strAssign(hString *S, char *chars) {
 }  // StrAssign
 
 // get heap string length
-int strLen(hString S) { return S->length; }
+int strLen(hString S) { return S.length; }
 
 //  string S and string T compare
 int strCompare(hString S, hString T);
