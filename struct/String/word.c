@@ -236,7 +236,7 @@ void exchange(BookIndexList *bookindexlist) {
   for (int i = 0; i < bookindexlist->number; i++) {
     if (bookindexlist->bookindex[i].index[0] <= 'Z') {
       bookindexlist->bookindex[i].index[0] =
-          char(int(bookindexlist->bookindex[i].index[0]) + 32);
+          (int(bookindexlist->bookindex[i].index[0]) + 32);
     }
   }
 }
