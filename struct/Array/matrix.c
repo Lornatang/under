@@ -87,7 +87,7 @@ void DestroyTMatrix(TMatrix *pMat) {
  *
  * @note 元素位置由 0 计起
  */
-int ElemLocate(const TMatrix *const pMat, int m, int n) {
+int ElemLocate(TMatrix *pMat, int m, int n) {
   int i = 0;
   for (i = 0; i < pMat->unul; ++i) {
     if (pMat->tup[i].m == m && pMat->tup[i].n == n) return i;
@@ -103,7 +103,7 @@ int ElemLocate(const TMatrix *const pMat, int m, int n) {
  *
  * @return void
  */
-void DisplayTMatrix(const TMatrix *const pMat) {
+void DisplayTMatrix(TMatrix *pMat) {
   int m = 0, n = 0, pos = 0;
   for (m = 0; m < pMat->row; ++m) {
     for (n = 0; n < pMat->col; ++n) {
@@ -124,9 +124,7 @@ void DisplayTMatrix(const TMatrix *const pMat) {
  *
  * @return 返回该矩阵所占用的空间的大小
  */
-int GetTMatrixSize(const TMatrix *const pMat) {
-  return pMat->unul * sizeof(TTuple);
-}
+int GetTMatrixSize(TMatrix *pMat) { return pMat->unul * sizeof(TTuple); }
 
 /**
  * @brief 将元素添加到稀疏矩阵的 m, n 位置
@@ -138,7 +136,7 @@ int GetTMatrixSize(const TMatrix *const pMat) {
  *
  * @return 返回添加后稀疏矩阵中非 0 元素的个数
  */
-int AppendElem(TMatrix *const pMat, int elm, int m, int n) {
+int AppendElem(TMatrix *pMat, int elm, int m, int n) {
   ///断言下标合法
   assert(m >= 0 && m < pMat->row && n >= 0 && n < pMat->col);
 
@@ -171,7 +169,7 @@ int AppendElem(TMatrix *const pMat, int elm, int m, int n) {
  *
  * @param 若元素存在, 则返回删除后稀疏矩阵中非 0 元素个数, 否则返回NPOS
  */
-int DeleteElem(TMatrix *const pMat, int m, int n) {
+int DeleteElem(TMatrix *pMat, int m, int n) {
   ///使用断言确保下标合法
   assert(m >= 0 && m < pMat->row && n >= 0 && n < pMat->col);
 
@@ -201,7 +199,7 @@ int DeleteElem(TMatrix *const pMat, int m, int n) {
  *
  * @return 返回复制成功后目标稀疏矩阵中的非0元素数量
  */
-int TMatrixCopy(TMatrix *const pMatDest, TMatrix *const pMatSrc) {
+int TMatrixCopy(TMatrix *pMatDest, TMatrix *pMatSrc) {
   if (pMatDest->tup) free(pMatDest->tup);
 
   ///源稀疏矩是否为空
@@ -232,7 +230,7 @@ int TMatrixCopy(TMatrix *const pMatDest, TMatrix *const pMatSrc) {
  *
  * @note 位置由 0 计起
  */
-int Value(const TMatrix *const pMat, int m, int n, int *pElm) {
+int Value(TMatrix *pMat, int m, int n, int *pElm) {
   ///使用断言确保下标合法
   assert(m >= 0 && m < pMat->row && n >= 0 && n < pMat->col);
 
@@ -254,7 +252,7 @@ int Value(const TMatrix *const pMat, int m, int n, int *pElm) {
  *
  * @return void
  */
-void ForEach(const TMatrix *const pMat, void (*func)(int *pElm)) {
+void ForEach(TMatrix *pMat, void (*func)(int *pElm)) {
   int m = 0, n = 0, pos = 0, t = 0;
 
   for (m = 0; m < pMat->row; ++m)
