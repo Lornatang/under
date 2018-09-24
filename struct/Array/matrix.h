@@ -9,8 +9,8 @@
 #endif  // FLAG
 
 typedef struct {
-  int m;    ///行下标
-  int n;    ///列下标
+  int row;  ///行下标
+  int col;  ///列下标
   int elm;  ///该下标所保存的元素
 } TTuple;   ///三元组结构
 
