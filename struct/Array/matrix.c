@@ -273,7 +273,7 @@ void ForEach(TMatrix *pMat, void (*func)(int *pElm)) {
  */
 void display(int *pElm) {
   if (*pElm == 0)
-    putchar('row');
+    printf("row");
   else
     printf("%d", *pElm);
 }
