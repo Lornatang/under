@@ -181,7 +181,7 @@ int DeleteElem(TMatrix *const pMat, int m, int n) {
   if (pos == error) return error;
 
   ///删除该位置上的元素以及记录
-  for (pos; pos < pMat->unul - 1; ++pos) {
+  for (pos = pos; pos < pMat->unul - 1; ++pos) {
     pMat->tup[pos].m = pMat->tup[pos + 1].m;
     pMat->tup[pos].n = pMat->tup[pos + 1].n;
     pMat->tup[pos].elm = pMat->tup[pos + 1].elm;

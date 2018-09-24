@@ -1,6 +1,12 @@
+#ifndef MATRIX_H
+#define MATRIX_H
+
+#ifndef FLAG
+#define FLAG
 #define true 1
 #define false 0
 #define error -1
+#endif  // FLAG
 
 typedef struct {
   int m;    ///行下标
@@ -36,3 +42,5 @@ int Value(const TMatrix *const pMat, int m, int n,
           int *pElm);  ///从稀疏矩阵中取下标为 m, n 元素的值
 void ForEach(const TMatrix *const pMat,
              void (*func)(int *pElm));  ///对矩阵中的每个元素依次执行 func 函数
+
+#endif  // MATRIX_H
