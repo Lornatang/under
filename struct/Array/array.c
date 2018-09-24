@@ -25,7 +25,8 @@ int GetMyVector(my_vector *vector, int index) {
   // 输入的数据如果小于0或者是大余数组最大存储值时，直接退出程序，因为数据不合法
   if (index >= vector->curSize || index < 0) {
     exit(1);
-  }  // 如果输入的是一个合法的数据那么返回对应的数据 return vector->data[index];
+  }  // 如果输入的是一个合法的数据那么返回对应的数据
+  return vector->data[index];
 }
 
 // 设置值
@@ -50,7 +51,7 @@ void DoubleCapacityMyVector(my_vector *vector) {
 //释放空间
 void FreeMyVector(my_vector *vector) { free(vector->data); }
 
-int main(int argc, char const *argv[]) {
+int main() {
   // 声明vector对象
   my_vector vector;
   int i;
