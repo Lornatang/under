@@ -12,14 +12,14 @@ typedef struct {
   int row;  // 行下标
   int col;  // 列下标
   int elm;  // 该下标所保存的元素
-} TTuple;   // 三元组结构
+} tuple;    // 三元组结构
 
 typedef struct {
-  TTuple *tup;  //三元组顺序表
-  int row;      // 矩阵行数
-  int col;      // 矩阵列数
-  int unul;     // 非 0 元素个数
-} TMatrix;      // 稀疏矩阵结构
+  tuple *tup;  //三元组顺序表
+  int row;     // 矩阵行数
+  int col;     // 矩阵列数
+  int unul;    // 非 0 元素个数
+} TMatrix;     // 稀疏矩阵结构
 
 // 稀疏矩阵方法声明
 TMatrix *init(int row, int col);  // 创建一个大小为 row x col 稀疏矩阵
