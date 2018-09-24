@@ -22,10 +22,10 @@ typedef struct {
 } TMatrix;      ///稀疏矩阵结构
 
 ///稀疏矩阵方法声明
-TMatrix *init(int sizeM, int sizeN);  ///创建一个大小为 sizeM x sizeN 稀疏矩阵
-TMatrix *CreateTMatirxFrom2DArray(void *pArr2D, int sizeM,
-                                  int sizeN);  ///从二维数组中创建稀疏矩阵
-void DestroyTMatrix(TMatrix *pMat);            ///销毁稀疏矩阵
+TMatrix *init(int row, int col);  ///创建一个大小为 row x col 稀疏矩阵
+TMatrix *CreateTMatirxFrom2DArray(void *p, int row,
+                                  int col);  ///从二维数组中创建稀疏矩阵
+void DestroyTMatrix(TMatrix *pMat);          ///销毁稀疏矩阵
 int ElemLocate(TMatrix *pMat, int m,
                int n);  ///定位矩阵下标 m, n 在稀疏矩阵中的存储位置
 void DisplayTMatrix(TMatrix *pMat);  ///输出稀疏矩阵

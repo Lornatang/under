@@ -5,18 +5,18 @@
 #include <string.h>
 
 /**
- * @brief 创建一个大小为 x * y 稀疏矩阵
+ * @brief 创建一个大小为 row * col 稀疏矩阵
  *
  * @return 返回创建的稀疏矩阵的指针
  */
-TMatrix *init(int x, int y) {
+TMatrix *init(int row, int col) {
   ///不接受大小为0的稀疏矩阵
-  assert(x > 0 && y > 0);
+  assert(row > 0 && col > 0);
 
   TMatrix *pMat = (TMatrix *)malloc(sizeof(TMatrix));
   pMat->tup = NULL;
-  pMat->row = x;
-  pMat->col = y;
+  pMat->row = row;
+  pMat->col = col;
   pMat->unul = 0;
 
   return pMat;
@@ -26,38 +26,38 @@ TMatrix *init(int x, int y) {
  * @brief 从二维数组中创建稀疏矩阵
  *
  * @param p 一个int型二维数组
- * @param x 二维数组的行数
- * @param y 二维数组的列数
+ * @param row 二维数组的行数
+ * @param col 二维数组的列数
  *
  * @return 返回创建的稀疏矩阵的指针
  */
-TMatrix *CreateTMatirxFrom2DArray(void *p, int x, int y) {
+TMatrix *CreateTMatirxFrom2DArray(void *p, int row, int col) {
   ///不接受大小为0的稀疏矩阵
-  assert(x > 0 && y > 0);
+  assert(row > 0 && col > 0);
 
   TMatrix *pMat = (TMatrix *)malloc(sizeof(TMatrix));
 
   ///初始化稀疏矩阵行数、列数
-  pMat->row = x;
-  pMat->col = y;
+  pMat->row = row;
+  pMat->col = col;
 
   ///第一趟遍历, 统计非零元素个数
   int m = 0, n = 0;
-  for (m = 0; m < x; ++m)
-    for (n = 0; n < y; ++n)
-      if (((int *)p)[x * m + n] != 0) ++pMat->unul;
+  for (m = 0; m < row; ++m)
+    for (n = 0; n < col; ++n)
+      if (((int *)p)[row * m + n] != 0) ++pMat->unul;
 
   ///申请合适长度的三元组类型的线性表
   pMat->tup = (TTuple *)calloc(pMat->unul, sizeof(TTuple));
 
   ///第二趟遍历, 存储二维矩阵中的非零元素
   int nPos = 0;
-  for (m = 0; m < x; ++m)
-    for (n = 0; n < y; ++n)
-      if (((int *)p)[x * m + n] != 0) {
+  for (m = 0; m < row; ++m)
+    for (n = 0; n < col; ++n)
+      if (((int *)p)[row * m + n] != 0) {
         pMat->tup[nPos].m = m;
         pMat->tup[nPos].n = n;
-        pMat->tup[nPos].elm = ((int *)p)[x * m + n];
+        pMat->tup[nPos].elm = ((int *)p)[row * m + n];
         ++nPos;
       }
 
@@ -269,11 +269,11 @@ void ForEach(TMatrix *pMat, void (*func)(int *pElm)) {
 ///测试
 
 /**
- * @brief ForEach的回调函数, 若元素为 0 则输出'x', 否则正常输出
+ * @brief ForEach的回调函数, 若元素为 0 则输出'row', 否则正常输出
  */
 void display(int *pElm) {
   if (*pElm == 0)
-    putchar('x');
+    putchar('row');
   else
     printf("%d", *pElm);
 }
@@ -302,7 +302,7 @@ int main() {
   printf("稀疏矩阵占用空间大小: %d (byte)\n", GetTMatrixSize(pMat));
 
   ///测试 init
-  ///创建一个 5 x 5 大小的稀疏矩阵
+  ///创建一个 5 row 5 大小的稀疏矩阵
   TMatrix *pMat2 = init(5, 5);
 
   ///测试 TMatrixCopy
