@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 // 初始化
-void InitMyVector(my_vector *vector) {
+void InitMyVector(array *vector) {
   // 数据初始化
   vector->curSize = 0;
   vector->maxSize = MY_VECTOR_DEF_SIZE;
@@ -13,7 +13,7 @@ void InitMyVector(my_vector *vector) {
 }
 
 // 追加值
-void AppendMyVector(my_vector *vector, int value) {
+void AppendMyVector(array *vector, int value) {
   // 空间不够了需要增大
   DoubleCapacityMyVector(vector);
   // 添加新的数据到数组尾
@@ -21,7 +21,7 @@ void AppendMyVector(my_vector *vector, int value) {
 }
 
 // 获的值
-int GetMyVector(my_vector *vector, int index) {
+int GetMyVector(array *vector, int index) {
   // 输入的数据如果小于0或者是大余数组最大存储值时，直接退出程序，因为数据不合法
   if (index >= vector->curSize || index < 0) {
     exit(1);
@@ -30,7 +30,7 @@ int GetMyVector(my_vector *vector, int index) {
 }
 
 // 设置值
-void SetMyVector(my_vector *vector, int index, int value) {
+void SetMyVector(array *vector, int index, int value) {
   // 用0作为默认值来他填充数组
   while (index >= vector->curSize) {
     AppendMyVector(vector, 0);
@@ -40,7 +40,7 @@ void SetMyVector(my_vector *vector, int index, int value) {
 }
 
 // 扩大空间
-void DoubleCapacityMyVector(my_vector *vector) {
+void DoubleCapacityMyVector(array *vector) {
   if (vector->curSize >= vector->maxSize) {
     // 扩大数组大小为当前的两倍
     vector->maxSize *= 2;
@@ -49,11 +49,11 @@ void DoubleCapacityMyVector(my_vector *vector) {
 }
 
 //释放空间
-void FreeMyVector(my_vector *vector) { free(vector->data); }
+void FreeMyVector(array *vector) { free(vector->data); }
 
 int main() {
   // 声明vector对象
-  my_vector vector;
+  array vector;
   int i;
   // 初始化vector对象
   InitMyVector(&vector);
