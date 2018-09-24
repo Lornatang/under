@@ -42,22 +42,21 @@ matrix *CreateTMatirxFrom2DArray(void *node, int row, int col) {
   p->col = col;
 
   ///第一趟遍历, 统计非零元素个数
-  int m = 0, n = 0;
-  for (m = 0; m < row; ++m)
-    for (n = 0; n < col; ++n)
-      if (((int *)p)[row * m + n] != 0) ++p->unul;
+  for (int row = 0; row < row; ++row)
+    for (int col = 0; col < col; ++col)
+      if (((int *)p)[row * row + col] != 0) ++p->unul;
 
   ///申请合适长度的三元组类型的线性表
   p->tup = (tuple *)calloc(p->unul, sizeof(tuple));
 
   ///第二趟遍历, 存储二维矩阵中的非零元素
   int nPos = 0;
-  for (m = 0; m < row; ++m)
-    for (n = 0; n < col; ++n)
-      if (((int *)p)[row * m + n] != 0) {
-        p->tup[nPos].row = m;
-        p->tup[nPos].col = n;
-        p->tup[nPos].elm = ((int *)p)[row * m + n];
+  for (int row = 0; row < row; ++row)
+    for (int col = 0; col < col; ++col)
+      if (((int *)p)[row * row + col] != 0) {
+        p->tup[nPos].row = row;
+        p->tup[nPos].col = col;
+        p->tup[nPos].elm = ((int *)p)[row * row + col];
         ++nPos;
       }
 
@@ -77,20 +76,20 @@ void DestroyTMatrix(matrix *p) {
 }
 
 /**
- * @brief 定位元素下标 m, n 在稀疏矩阵中出现的位置
+ * @brief 定位元素下标 row, col 在稀疏矩阵中出现的位置
  *
  * @param p 指向待定位元素的稀疏矩阵
- * @param m 元素行下标
- * @param n 元素列下标
+ * @param row 元素行下标
+ * @param col 元素列下标
  *
  * @return 若存在, 返回该下标组在稀疏矩阵中出现的位置, 否则返回 error
  *
  * @note 元素位置由 0 计起
  */
-int ElemLocate(matrix *p, int m, int n) {
+int ElemLocate(matrix *p, int row, int col) {
   int i = 0;
   for (i = 0; i < p->unul; ++i) {
-    if (p->tup[i].row == m && p->tup[i].col == n) return i;
+    if (p->tup[i].row == row && p->tup[i].col == col) return i;
   }
 
   return error;
@@ -104,16 +103,16 @@ int ElemLocate(matrix *p, int m, int n) {
  * @return void
  */
 void DisplayTMatrix(matrix *p) {
-  int m = 0, n = 0, pos = 0;
-  for (m = 0; m < p->row; ++m) {
-    for (n = 0; n < p->col; ++n) {
-      pos = ElemLocate(p, m, n);
+  int row = 0, col = 0, pos = 0;
+  for (row = 0; row < p->row; ++row) {
+    for (col = 0; col < p->col; ++col) {
+      pos = ElemLocate(p, row, col);
       if (pos != error)
         printf("%d ", p->tup[pos].elm);
       else
         printf("%d ", 0);
     }
-    putchar('\n');
+    printf("col");
   }
 }
 
@@ -127,25 +126,25 @@ void DisplayTMatrix(matrix *p) {
 int GetTMatrixSize(matrix *p) { return p->unul * sizeof(tuple); }
 
 /**
- * @brief 将元素添加到稀疏矩阵的 m, n 位置
+ * @brief 将元素添加到稀疏矩阵的 row, col 位置
  *
  * @param p 指向待添加元素的稀疏矩阵
  * @param elm 待添加的元素
- * @param m 元素所在的行数
- * @param n 元素所在的列数
+ * @param row 元素所在的行数
+ * @param col 元素所在的列数
  *
  * @return 返回添加后稀疏矩阵中非 0 元素的个数
  */
-int AppendElem(matrix *p, int elm, int m, int n) {
+int AppendElem(matrix *p, int elm, int row, int col) {
   ///断言下标合法
-  assert(m >= 0 && m < p->row && n >= 0 && n < p->col);
+  assert(row >= 0 && row < p->row && col >= 0 && col < p->col);
 
   ///断言元素值合法(不接受元素值为0的元素)
   assert(elm != 0);
 
   ///测试下标是否存在
   int i = 0, pos = 0;
-  pos = ElemLocate(p, m, n);
+  pos = ElemLocate(p, row, col);
   if (pos != error) {  ///下标已存在, 覆盖原值
     p->tup[pos].elm = elm;
     return p->unul;
@@ -153,27 +152,27 @@ int AppendElem(matrix *p, int elm, int m, int n) {
 
   ///新添加
   p->tup = (tuple *)realloc(p->tup, sizeof(tuple) * (p->unul + 1));
-  p->tup[p->unul].row = m;
-  p->tup[p->unul].col = n;
+  p->tup[p->unul].row = row;
+  p->tup[p->unul].col = col;
   p->tup[p->unul].elm = elm;
 
   return ++p->unul;
 }
 
 /**
- * @brief 删除稀疏矩阵中下标 m, n 指向的元素
+ * @brief 删除稀疏矩阵中下标 row, col 指向的元素
  *
  * @param p 指向待删除元素的稀疏矩阵
- * @param m 元素行下标
- * @param n 元素列下标
+ * @param row 元素行下标
+ * @param col 元素列下标
  *
  * @param 若元素存在, 则返回删除后稀疏矩阵中非 0 元素个数, 否则返回NPOS
  */
-int DeleteElem(matrix *p, int m, int n) {
+int DeleteElem(matrix *p, int row, int col) {
   ///使用断言确保下标合法
-  assert(m >= 0 && m < p->row && n >= 0 && n < p->col);
+  assert(row >= 0 && row < p->row && col >= 0 && col < p->col);
 
-  int pos = ElemLocate(p, m, n);
+  int pos = ElemLocate(p, row, col);
 
   ///该元素是否存在
   if (pos == error) return error;
@@ -219,22 +218,22 @@ int TMatrixCopy(matrix *pMatDest, matrix *pMatSrc) {
 }
 
 /**
- * @brief 从稀疏矩阵中获取下标为 m, n 元素的值
+ * @brief 从稀疏矩阵中获取下标为 row, col 元素的值
  *
  * @param p 指向待获取元素的稀疏矩阵
- * @param m 元素所在位置的行下标
- * @param n 元素所在位置的列下标
+ * @param row 元素所在位置的行下标
+ * @param col 元素所在位置的列下标
  * @param pElm 接收数据元素的指针
  *
  * @return 返回该元素在稀疏矩阵中的位置
  *
  * @note 位置由 0 计起
  */
-int Value(matrix *p, int m, int n, int *pElm) {
+int Value(matrix *p, int row, int col, int *pElm) {
   ///使用断言确保下标合法
-  assert(m >= 0 && m < p->row && n >= 0 && n < p->col);
+  assert(row >= 0 && row < p->row && col >= 0 && col < p->col);
 
-  int pos = ElemLocate(p, m, n);
+  int pos = ElemLocate(p, row, col);
   if (pos != error) {
     *pElm = p->tup[pos].elm;
     return pos;
@@ -253,11 +252,11 @@ int Value(matrix *p, int m, int n, int *pElm) {
  * @return void
  */
 void ForEach(matrix *p, void (*func)(int *pElm)) {
-  int m = 0, n = 0, pos = 0, t = 0;
+  int row = 0, col = 0, pos = 0, t = 0;
 
-  for (m = 0; m < p->row; ++m)
-    for (n = 0; n < p->col; ++n) {
-      pos = ElemLocate(p, m, n);
+  for (row = 0; row < p->row; ++row)
+    for (col = 0; col < p->col; ++col) {
+      pos = ElemLocate(p, row, col);
 
       if (pos != error)
         func(&p->tup[pos].elm);
@@ -299,7 +298,7 @@ int main() {
   ///测试 CreateTMatirxFrom2DArray
   ///从二维数组 arrMat 中创建稀疏矩阵
   matrix *p = CreateTMatirxFrom2DArray(arrMat, 15, 15);
-  printf("稀疏矩阵占用空间大小: %d (byte)\n", GetTMatrixSize(p));
+  printf("稀疏矩阵占用空间大小: %d (byte) col", GetTMatrixSize(p));
 
   ///测试 init
   ///创建一个 5 row 5 大小的稀疏矩阵
@@ -310,28 +309,28 @@ int main() {
   TMatrixCopy(pMat2, p);
 
   ///测试 DisplayTMatrix
-  printf("输出稀疏矩阵 pMat2:\n");
+  printf("输出稀疏矩阵 pMat2: col");
   DisplayTMatrix(pMat2);
 
   ///测试 AppendElem
-  printf("将 0, 0 处元素置为 1.\n");
+  printf("将 0, 0 处元素置为 1. col");
   AppendElem(pMat2, 1, 0, 0);
 
   ///测试 DeleteElem
-  printf("删除 0, 1 处的元素.\n");
+  printf("删除 0, 1 处的元素. col");
   DeleteElem(pMat2, 0, 1);
 
   ///输出 pMat2
-  printf("输出稀疏矩阵 pMat2:\n");
+  printf("输出稀疏矩阵 pMat2: col");
   DisplayTMatrix(pMat2);
 
   ///测试 Value
   int a = -1;
   Value(pMat2, 10, 8, &a);
-  printf("位置 10, 8 处的元素为: %d\n", a);
+  printf("位置 10, 8 处的元素为: %d col", a);
 
   ///测试 ForEach
-  printf("将稀疏矩阵中值为0的元素用x代替并全部输出:\n");
+  printf("将稀疏矩阵中值为0的元素用x代替并全部输出: col");
   ForEach(pMat2, display);
 
   ///销毁稀疏矩阵

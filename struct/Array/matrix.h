@@ -26,18 +26,18 @@ matrix *init(int row, int col);  // 创建一个大小为 row x col 稀疏矩阵
 matrix *CreateTMatirxFrom2DArray(void *p, int row,
                                  int col);  // 从二维数组中创建稀疏矩阵
 void DestroyTMatrix(matrix *pMat);          // 销毁稀疏矩阵
-int ElemLocate(matrix *pMat, int m,
-               int n);  // 定位矩阵下标 m, n 在稀疏矩阵中的存储位置
+int ElemLocate(matrix *pMat, int row,
+               int col);  // 定位矩阵下标 row, col 在稀疏矩阵中的存储位置
 void DisplayTMatrix(matrix *pMat);  // 输出稀疏矩阵
 int GetTMatrixSize(matrix *pMat);  ///输出稀疏矩阵 pMat 所占用的空间大小(字节)
-int AppendElem(matrix *pMat, int elm, int m,
-               int n);  // 将元素 elm 添加到稀疏矩阵 m, n 位置
-int DeleteElem(matrix *pMat, int m,
-               int n);  // 删除稀疏矩阵中 m, n 下标指向的元素
+int AppendElem(matrix *pMat, int elm, int row,
+               int col);  // 将元素 elm 添加到稀疏矩阵 row, col 位置
+int DeleteElem(matrix *pMat, int row,
+               int col);  // 删除稀疏矩阵中 row, col 下标指向的元素
 int TMatrixCopy(matrix *pMatDest,
                 matrix *pMatSrc);  // 将稀疏矩阵 pMatSrc 复制到 pMatDest
-int Value(matrix *pMat, int m, int n,
-          int *pElm);  // 从稀疏矩阵中取下标为 m, n 元素的值
+int Value(matrix *pMat, int row, int col,
+          int *pElm);  // 从稀疏矩阵中取下标为 row, col 元素的值
 void ForEach(matrix *pMat,
              void (*func)(int *pElm));  // 对矩阵中的每个元素依次执行 func 函数
 
