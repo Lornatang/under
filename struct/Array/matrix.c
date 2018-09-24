@@ -42,21 +42,21 @@ matrix *CreateTMatirxFrom2DArray(void *node, int row, int col) {
   p->col = col;
 
   ///第一趟遍历, 统计非零元素个数
-  for (int row = 0; row < row; ++row)
-    for (int col = 0; col < col; ++col)
-      if (((int *)p)[row * row + col] != 0) ++p->unul;
+  for (int i = 0; i < row; ++i)
+    for (int j = 0; j < col; ++j)
+      if (((int *)p)[i * j + i] != 0) ++p->unul;
 
   ///申请合适长度的三元组类型的线性表
   p->tup = (tuple *)calloc(p->unul, sizeof(tuple));
 
   ///第二趟遍历, 存储二维矩阵中的非零元素
   int nPos = 0;
-  for (int row = 0; row < row; ++row)
-    for (int col = 0; col < col; ++col)
-      if (((int *)p)[row * row + col] != 0) {
-        p->tup[nPos].row = row;
-        p->tup[nPos].col = col;
-        p->tup[nPos].elm = ((int *)p)[row * row + col];
+  for (int i = 0; i < row; ++i)
+    for (int j = 0; j < col; ++j)
+      if (((int *)p)[i * j + i] != 0) {
+        p->tup[nPos].row = i;
+        p->tup[nPos].col = j;
+        p->tup[nPos].elm = ((int *)p)[i * j + j];
         ++nPos;
       }
 
