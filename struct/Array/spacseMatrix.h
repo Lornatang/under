@@ -1,5 +1,5 @@
-#ifndef MATRIX_H
-#define MATRIX_H
+#ifndef SPARSEMATRIX_H
+#define SPARSEMATRIX_H
 
 #ifndef FLAG
 #define FLAG
@@ -41,4 +41,4 @@ int Value(matrix *pMat, int row, int col,
 void ForEach(matrix *pMat,
              void (*func)(int *pElm));  // 对矩阵中的每个元素依次执行 func 函数
 
-#endif  // MATRIX_H
+#endif  // SPARSEMATRIX_H

@@ -1,4 +1,4 @@
-#include "matrix.h"
+#include "spacseMatrix.h"
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -103,10 +103,9 @@ int ElemLocate(matrix *p, int row, int col) {
  * @return void
  */
 void DisplayTMatrix(matrix *p) {
-  int row = 0, col = 0, pos = 0;
-  for (row = 0; row < p->row; ++row) {
-    for (col = 0; col < p->col; ++col) {
-      pos = ElemLocate(p, row, col);
+  for (int row = 0; row < p->row; ++row) {
+    for (int col = 0; col < p->col; ++col) {
+      int pos = ElemLocate(p, row, col);
       if (pos != error)
         printf("%d ", p->tup[pos].elm);
       else
