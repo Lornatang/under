@@ -1,0 +1,5 @@
+#ifndef GENERATABLE_H
+#define GENERATABLE_H
+
+
+#endif // GENERATABLE_H
