@@ -1,6 +1,6 @@
+#include "generaTable.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "generaTable.h"
 
 // 1、建立广义表
 //假定广义表的元素类型ElemType为字符类型char，每个单元素的值被限定为英文字母，
@@ -17,8 +17,7 @@ void CreateGList_char(gNode** GL) {
     *GL = (gNode*)malloc(sizeof(gNode));
     (*GL)->tag = 1;
     CreateGList_char(&((*GL)->sublist));  //递归
-  } else  //若输入为字符则建立由*GL所指向的单元素结点
-  {
+  } else {  //若输入为字符则建立由*GL所指向的单元素结点
     *GL = (gNode*)malloc(sizeof(gNode));
     (*GL)->tag = 0;
     (*GL)->data = ch;
@@ -36,8 +35,7 @@ void CreateGList_char(gNode** GL) {
 // 2、打印输出广义表
 //打印输出上面的广义表同样需要递归子表和递归后继表
 void PrintfGList_char(gNode* GL) {
-  if (GL->tag == 1)  //表结点的处理情况
-  {
+  if (GL->tag == 1) {  //表结点的处理情况
     printf("%c", '(');        //先输出左括号，作为开始符号
     if (GL->sublist == NULL)  //若子表为空
       printf("%c", '#');
