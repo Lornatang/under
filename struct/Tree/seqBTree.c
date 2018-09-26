@@ -37,7 +37,7 @@ int CreateBiTree(SqBiTree T) {
   }
   for (i = l; i < MAX_TREE_SIZE; i++)  // 将空赋值给T的后面的结点
     T[i] = Nil;
-  return 1;
+  return 0;
 }
 
 // 若T为空二叉树,则返回1,否则0
