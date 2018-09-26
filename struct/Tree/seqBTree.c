@@ -17,13 +17,14 @@ void DestroyBiTree() {
 
 // 按层序次序输入二叉树中结点的值(字符型或整型), 构造顺序存储的二叉树T
 int CreateBiTree(SqBiTree T) {
-  int i = 0, l;
+  int i = 0, l = 0;
 
   char s[MAX_TREE_SIZE];
   printf("请按层序输入结点的值(字符)，空格表示空结点，结点数≤%d:\n",
          MAX_TREE_SIZE);
   printf("例如：abcefgh\n");
-  gets(s);            // 输入字符串
+  scanf("%s", s);  // 输入字符串
+  // gets(s);       // this is unsafe!
   l = strlen(s);      // 求字符串的长度
   for (; i < l; i++)  // 将字符串赋值给T
   {
