@@ -50,14 +50,14 @@ int BiTreeEmpty(SqBiTree T) {
 
 //  返回T的深度
 int BiTreeDepth(SqBiTree T) {
-  int i, j = -1;
-  for (i = MAX_TREE_SIZE - 1; i >= 0; i--)  // 找到最后一个结点
+  int i = 0, j = -1;
+  for (i = MAX_TREE_SIZE; i > 0; i--)  // 找到最后一个结点
     if (T[i] != Nil) break;
+
   i++;  // 为了便于计算
-  do
-    j++;
-  while (i >= pow(2, j));  // i > pow(2, depth-1) && i <= pow(2, depth)
-  return j;                // j = depth;
+
+  while (i >= pow(2, j)) j += 1;
+  return j;  // j = depth;
 }
 
 // 当T不空,用e返回T的根,返回1;否则返回0,e无定义
