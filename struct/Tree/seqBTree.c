@@ -60,7 +60,7 @@ int BiTreeDepth(SqBiTree T) {
   return j;  // j = depth;
 }
 
-// 当T不空,用e返回T的根,返回1;否则返回0,e无定义
+// 当T不空,用e返回T的根,返回0;否则返回1,e无定义
 int Root(SqBiTree T, char *e) {
   if (BiTreeEmpty(T))  // T空
     return 0;
