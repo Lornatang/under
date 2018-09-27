@@ -187,13 +187,13 @@ int InitQueue(SqQueue *Q) {
 
 // 插入元素e为Q的新的队尾元素
 int EnQueue(SqQueue *Q, int e) {
-  if ((*Q).rear >= MAXQSIZE) {  // 队列满，增加1个存储单元
-    (*Q).base = (int *)realloc((*Q).base, ((*Q).rear + 1) * sizeof(int));
-    if (!(*Q).base)  // 增加单元失败
+  if (Q->rear >= MAXQSIZE) {  // 队列满，增加1个存储单元
+    Q->base = (int *)realloc(Q->base, (Q->rear + 1) * sizeof(int));
+    if (!Q->base)  // 增加单元失败
       return 0;
   }
-  *((*Q).base + (*Q).rear) = e;
-  (*Q).rear++;
+  *(Q->base + Q->rear) = e;
+  Q->rear += 1;
   return 1;
 }
 
