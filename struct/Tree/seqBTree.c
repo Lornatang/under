@@ -229,9 +229,9 @@ int DeleteChild(SqBiTree T, position p, int LR) {
 
 void PreTraverse(SqBiTree T, int e) {
   // PreOrderTraverse()调用
-  VisitFunc(T[e]);              //先调用函数VisitFunc处理根
+  VisitFunc(T[e]);              // 先调用函数VisitFunc处理根
   if (T[2 * e + 1] != Nil)      // 左子树不空
-    PreTraverse(T, 2 * e + 1);  //然后处理左子树
+    PreTraverse(T, 2 * e + 1);  // 然后处理左子树
   if (T[2 * e + 2] != Nil)      // 右子树不空
     PreTraverse(T, 2 * e + 2);
 }
@@ -283,9 +283,9 @@ int PostOrderTraverse(SqBiTree T, int (*Visit)(char)) {
 
 // 层序遍历二叉树
 void LevelOrderTraverse(SqBiTree T, int (*Visit)(char)) {
-  int i = MAX_TREE_SIZE - 1, j;
+  int i = MAX_TREE_SIZE, j;
   while (T[i] == Nil) i--;         // 找到最后一个非空结点的序号
-  for (j = 0; j <= i; j++)         // 从根结点起,按层序遍历二叉树
+  for (j = 0; j < i; j++)          // 从根结点起,按层序遍历二叉树
     if (T[j] != Nil) Visit(T[j]);  // 只遍历非空的结点
   printf("\n");
 }
@@ -295,7 +295,7 @@ void Print(SqBiTree T) {
   int j, k;
   position p;
   char e;
-  for (j = 1; j <= BiTreeDepth(T); j++) {
+  for (j = 0; j < BiTreeDepth(T); j++) {
     printf("第%d层: ", j);
     for (k = 1; k <= pow(2, j - 1); k++) {
       p.level = j;
