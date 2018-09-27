@@ -8,7 +8,6 @@ void InitTree(Tree *tree, char ref) {
   tree->refValue = ref;
 }
 
-void CreateTree(Tree *tree, char *str) { CreateTree(tree, tree->root, str); }
 void CreateTree(Tree *tree, TreeNode *&t, char *&str) {
   if (*str == tree->refValue)
     t = NULL;
@@ -22,18 +21,16 @@ void CreateTree(Tree *tree, TreeNode *&t, char *&str) {
 }
 
 TreeNode *Root(Tree *tree) { return tree->root; }
-TreeNode *FirstChild(Tree *tree) { return FirstChild(tree->root); }
+
 TreeNode *FirstChild(TreeNode *t) {
   if (t == NULL) return NULL;
   return t->firstChild;
 }
-TreeNode *NextSibling(Tree *tree) { return NextSibling(tree->root); }
 TreeNode *NextSibling(TreeNode *t) {
   if (t == NULL) return NULL;
   return t->nextSibling;
 }
 
-TreeNode *Find(Tree *tree, char key) { return Find(tree->root, key); }
 TreeNode *Find(TreeNode *t, char key) {
   if (t == NULL) return NULL;
   if (t->data == key) return t;
@@ -43,8 +40,6 @@ TreeNode *Find(TreeNode *t, char key) {
   if (p != NULL) return p;
   return Find(t->nextSibling, key);
 }
-
-TreeNode *Parent(Tree *tree, TreeNode *p) { return Parent(tree->root, p); }
 
 //有点复杂
 TreeNode *Parent(TreeNode *t, TreeNode *p) {
@@ -60,4 +55,17 @@ TreeNode *Parent(TreeNode *t, TreeNode *p) {
 
   if (q != NULL && q == p) return t;
   return NULL;
+}
+
+int main() {
+  char *str = "RAD#E##B#CFG#H#K#####";
+  Tree mytree;
+  InitTree(&mytree, '#');
+  CreateTree(&mytree, str);
+
+  TreeNode *p = Find(&mytree, 'K');
+  TreeNode *parent = Parent(&mytree, p);
+  printf("%c\n", parent->data);
+
+  return 0;
 }
