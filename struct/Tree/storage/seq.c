@@ -39,7 +39,7 @@ void findP(tree *T) {
 int main() {
   tree *T;
   T = init();
-  while (true) {
+  while (1) {
     findP(T);
   }
 
