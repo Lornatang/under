@@ -41,7 +41,6 @@ TreeNode *Find(TreeNode *t, char key) {
   return Find(t->nextSibling, key);
 }
 
-//有点复杂
 TreeNode *Parent(TreeNode *t, TreeNode *p) {
   if (t == NULL || p == NULL || t == p) return NULL;
 
