@@ -29,3 +29,19 @@ tree *init() {
   T->data[0].parent = -1;
   return T;
 }
+
+void findP(tree *T) {
+  printf("Please input to query node sequence numbers.\n");
+  int i = scanf("%d", &i);
+  printf("%c parents node value is %d\n", T->data[i].data, T->data[i].parent);
+}
+
+int main() {
+  tree *T;
+  T = init();
+  while (true) {
+    findP(T);
+  }
+
+  return 0;
+}
