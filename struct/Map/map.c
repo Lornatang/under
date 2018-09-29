@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//根据名称得到指定顶点在顶点集合中的下标
+// 根据名称得到指定顶点在顶点集合中的下标
 // vex 顶点
 // return 如果找到，则返回下标，否则，返回0
 int getIndexOfVexs(char vex, MGraph *MG) {
